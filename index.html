@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>OIDARCHE — Radio</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 50% 35%, #183d4d 0%, #0b1d27 35%, #05090d 75%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image:
+        radial-gradient(#ffffff 0.6px, transparent 0.6px);
+      background-size: 5px 5px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 25px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo {
+      font-size: clamp(38px, 8vw, 76px);
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      margin-left: 0.22em;
+      margin-bottom: 15px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      opacity: 0.55;
+      margin-left: 0.45em;
+    }
+
+    .player {
+      margin-top: 70px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .play {
+      width: 105px;
+      height: 105px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.04);
+      color: white;
+      font-size: 27px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .play:hover {
+      transform: scale(1.08);
+      background: rgba(255,255,255,0.12);
+      border-color: white;
+    }
+
+    .play.playing {
+      box-shadow:
+        0 0 0 12px rgba(255,255,255,0.03),
+        0 0 50px rgba(80,180,210,0.25);
+    }
+
+    .status {
+      margin-top: 25px;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    .track {
+      margin-top: 45px;
+      text-align: center;
+      min-height: 55px;
+    }
+
+    .now {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 12px;
+    }
+
+    .song {
+      font-size: 19px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+    }
+
+    .artist {
+      margin-top: 8px;
+      font-size: 12px;
+      opacity: 0.5;
+      letter-spacing: 0.12em;
+    }
+
+    .bottom {
+      position: fixed;
+      bottom: 35px;
+      display: flex;
+      gap: 35px;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0.45;
+    }
+
+    .bottom a {
+      color: white;
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+
+    .bottom a:hover {
+      opacity: 1;
+    }
+
+    .waves {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border: 1px solid rgba(255,255,255,0.025);
+      border-radius: 50%;
+      animation: pulse 7s infinite ease-in-out;
+    }
+
+    .waves::before,
+    .waves::after {
+      content: "";
+      position: absolute;
+      inset: 60px;
+      border: 1px solid rgba(255,255,255,0.025);
+      border-radius: 50%;
+    }
+
+    .waves::after {
+      inset: 120px;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(0.9);
+        opacity: 0.4;
+      }
+
+      50% {
+        transform: scale(1.08);
+        opacity: 0.8;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .logo {
+        font-size: 38px;
+        letter-spacing: 0.15em;
+      }
+
+      .subtitle {
+        font-size: 9px;
+      }
+
+      .waves {
+        width: 420px;
+        height: 420px;
+      }
+
+      .play {
+        width: 90px;
+        height: 90px;
+      }
+
+      .bottom {
+        bottom: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="noise"></div>
+
+  <div class="waves"></div>
+
+  <main class="container">
+
+    <div class="logo">OIDARCHE</div>
+
+    <div class="subtitle">
+      independent radio
+    </div>
+
+    <div class="player">
+
+      <button class="play" id="playButton" aria-label="Play radio">
+        ▶
+      </button>
+
+      <div class="status" id="status">
+        offline
+      </div>
+
+      <div class="track">
+
+        <div class="now">
+          now playing
+        </div>
+
+        <div class="song" id="song">
+          Oidarche Radio
+        </div>
+
+        <div class="artist" id="artist">
+          music for another state of mind
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <div class="bottom">
+    <a href="#" id="instagram">instagram</a>
+    <span>∞</span>
+    <a href="#">oidarche</a>
+  </div>
+
+  <audio id="radio" preload="none"></audio>
+
+  <script>
+
+    /*
+      BURAYA RADYO YAYIN ADRESİMİZİ KOYACAĞIZ.
+      Şimdilik boş bırakıyoruz.
+    */
+
+    const radio = document.getElementById("radio");
+    const button = document.getElementById("playButton");
+    const status = document.getElementById("status");
+
+    button.addEventListener("click", function () {
+
+      if (!radio.src) {
+        status.textContent = "coming soon";
+        return;
+      }
+
+      if (radio.paused) {
+
+        radio.play();
+
+        button.textContent = "❚❚";
+        button.classList.add("playing");
+        status.textContent = "live";
+
+      } else {
+
+        radio.pause();
+
+        button.textContent = "▶";
+        button.classList.remove("playing");
+        status.textContent = "paused";
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
