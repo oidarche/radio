@@ -33,10 +33,7 @@
       padding: 0 4.45vw 35px;
     }
 
-
-    /* =========================
-       HEADER
-    ========================= */
+    /* HEADER */
 
     .header {
       height: 124px;
@@ -47,10 +44,10 @@
     .logo {
       position: absolute;
       left: 0;
-      top: 32px;
-      width: 190px;
+      top: 28px;
+      width: 180px;
       height: auto;
-      display: block;
+      z-index: 10;
     }
 
     .on-air {
@@ -59,6 +56,7 @@
       bottom: 27px;
 
       color: #00bbff;
+
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 2px;
@@ -66,10 +64,7 @@
       white-space: nowrap;
     }
 
-
-    /* =========================
-       HERO
-    ========================= */
+    /* HERO / GIF */
 
     .hero {
       position: relative;
@@ -84,23 +79,12 @@
 
       border-radius: 2px;
 
-      background:
-        radial-gradient(
-          circle at center,
-          #173845 0%,
-          #111b20 32%,
-          #0b0d0e 70%,
-          #070707 100%
-        );
+      background: #1c1b18;
     }
-
-
-    /*
-      Buraya ileride OIDARCHE GIF'i gelecek.
-    */
 
     .hero-gif {
       position: absolute;
+
       inset: 0;
 
       width: 100%;
@@ -108,26 +92,16 @@
 
       object-fit: cover;
 
-      display: none;
+      display: block;
     }
-
 
     .hero-overlay {
       position: absolute;
+
       inset: 0;
 
-      background:
-        radial-gradient(
-          circle at center,
-          rgba(0, 187, 255, 0.10),
-          transparent 45%
-        );
+      background: rgba(5, 5, 5, 0.18);
     }
-
-
-    /* =========================
-       HERO TEXT
-    ========================= */
 
     .gif-label {
       position: absolute;
@@ -153,18 +127,14 @@
 
       z-index: 2;
 
-      color: #8e8980;
+      color: #a69e91;
 
       font-size: 12px;
     }
 
-
-    /* =========================
-       PLAY BUTTON
-    ========================= */
+    /* PLAY BUTTON */
 
     .play-button {
-
       position: absolute;
 
       top: 50%;
@@ -184,13 +154,12 @@
       z-index: 5;
 
       display: flex;
+
       align-items: center;
       justify-content: center;
     }
 
-
     .play-ring {
-
       position: absolute;
 
       width: 140px;
@@ -198,7 +167,7 @@
 
       border-radius: 50%;
 
-      border: 3px solid rgba(0, 187, 255, 0.18);
+      border: 4px solid transparent;
 
       border-right-color: #00bbff;
 
@@ -207,9 +176,7 @@
       transition: all 0.35s ease;
     }
 
-
     .play-triangle {
-
       width: 0;
       height: 0;
 
@@ -223,26 +190,17 @@
       transition: transform 0.35s ease;
     }
 
-
     .play-button:hover .play-ring {
-
-      transform:
-        rotate(-45deg)
-        scale(1.07);
+      transform: rotate(-45deg) scale(1.05);
     }
 
-
     .play-button:hover .play-triangle {
-
       transform: scale(1.08);
     }
 
-
     .play-button.playing .play-ring {
-
       animation: pulse 2s infinite ease-in-out;
     }
-
 
     .play-button.playing .play-triangle {
 
@@ -251,39 +209,28 @@
 
       border: none;
 
-      border-left: 5px solid white;
-      border-right: 5px solid white;
+      border-left: 6px solid white;
+      border-right: 6px solid white;
 
       margin-left: 0;
     }
-
 
     @keyframes pulse {
 
       0%,
       100% {
-
-        opacity: 0.7;
-
-        transform:
-          rotate(-45deg)
-          scale(1);
+        opacity: .75;
+        transform: rotate(-45deg) scale(1);
       }
 
       50% {
-
         opacity: 1;
-
-        transform:
-          rotate(-45deg)
-          scale(1.06);
+        transform: rotate(-45deg) scale(1.06);
       }
+
     }
 
-
-    /* =========================
-       NOW PLAYING
-    ========================= */
+    /* NOW PLAYING */
 
     .now-playing {
 
@@ -294,7 +241,6 @@
 
       border-bottom: 1px solid #2e2b26;
     }
-
 
     .now-label {
 
@@ -308,7 +254,6 @@
       margin-bottom: 8px;
     }
 
-
     .track {
 
       color: #ede8db;
@@ -316,9 +261,8 @@
       font-size: 25px;
       font-weight: 600;
 
-      letter-spacing: 0.5px;
+      letter-spacing: .5px;
     }
-
 
     .station {
 
@@ -327,7 +271,7 @@
       right: 0;
       bottom: 17px;
 
-      color: #8e8980;
+      color: #a69e91;
 
       font-size: 11px;
       font-weight: 600;
@@ -335,10 +279,7 @@
       letter-spacing: 1.5px;
     }
 
-
-    /* =========================
-       FOOTER
-    ========================= */
+    /* FOOTER */
 
     .footer {
 
@@ -350,65 +291,44 @@
       padding-top: 20px;
     }
 
-
     .genres,
     .tagline {
 
-      color: #8e8980;
+      color: #a69e91;
 
       font-size: 11px;
       font-weight: 400;
     }
 
-
     .genres {
-
       letter-spacing: 1.2px;
     }
 
-
     .tagline {
-
-      letter-spacing: 0.8px;
+      letter-spacing: .8px;
     }
 
-
-    /* =========================
-       MOBILE
-    ========================= */
+    /* MOBILE */
 
     @media (max-width: 700px) {
 
       .page {
-
-        padding:
-          0
-          20px
-          25px;
+        padding: 0 20px 25px;
       }
 
-
       .header {
-
         height: 90px;
       }
 
-
       .logo {
-
-        top: 25px;
-
-        width: 140px;
+        width: 130px;
+        top: 20px;
       }
-
 
       .on-air {
-
         bottom: 18px;
-
         font-size: 10px;
       }
-
 
       .hero {
 
@@ -419,7 +339,6 @@
         min-height: 280px;
       }
 
-
       .gif-label {
 
         font-size: 10px;
@@ -427,7 +346,6 @@
         top: 18px;
         left: 18px;
       }
-
 
       .gif-description {
 
@@ -437,7 +355,6 @@
         left: 18px;
       }
 
-
       .play-button,
       .play-ring {
 
@@ -445,26 +362,21 @@
         height: 100px;
       }
 
-
       .play-triangle {
 
         border-top-width: 12px;
         border-bottom-width: 12px;
+
         border-left-width: 18px;
       }
 
-
       .now-playing {
-
         padding-top: 20px;
       }
 
-
       .track {
-
         font-size: 19px;
       }
-
 
       .station {
 
@@ -475,7 +387,6 @@
         font-size: 9px;
       }
 
-
       .footer {
 
         flex-direction: column;
@@ -485,86 +396,65 @@
         gap: 14px;
       }
 
-
       .genres,
       .tagline {
-
         font-size: 9px;
       }
 
     }
 
   </style>
-
 </head>
 
 
 <body>
 
-
   <div class="page">
-
 
     <!-- HEADER -->
 
     <header class="header">
 
-      <!-- OIDARCHE LOGO -->
-
       <img
         class="logo"
-        src="https://www.figma.com/api/mcp/asset/12cf2dfe-2bcc-4b7e-8f75-c3dcf88c9dbb.svg"
+        src="Vector%20mavi.png"
         alt="OIDARCHE"
       >
 
-
       <div class="on-air">
-
         ●&nbsp;&nbsp;ON AIR
-
       </div>
 
     </header>
-
 
 
     <!-- MAIN -->
 
     <main>
 
-
-      <!-- HERO -->
+      <!-- GIF AREA -->
 
       <section class="hero">
-
 
         <img
           class="hero-gif"
           id="heroGif"
-          src=""
+          src="gif%20sunset.gif"
           alt="Oidarche visual"
         >
 
-
         <div class="hero-overlay"></div>
 
-
         <div class="gif-label">
-
           OIDARCHE RADIO
-
         </div>
-
 
         <div class="gif-description">
-
           music without borders
-
         </div>
 
 
-
-        <!-- PLAY -->
+        <!-- PLAY BUTTON -->
 
         <button
           class="play-button"
@@ -578,85 +468,59 @@
 
         </button>
 
-
       </section>
-
 
 
       <!-- NOW PLAYING -->
 
       <section class="now-playing">
 
-
         <div class="now-label">
-
           NOW PLAYING
-
         </div>
-
 
         <div
           class="track"
           id="track"
         >
-
-          OIDARCHE RADIO
-
+          Oidarche Radio — Night Soul
         </div>
-
 
         <div class="station">
-
-          NIGHT SOUL
-          &nbsp;/&nbsp;
-          RADIO
-
+          NIGHT SOUL&nbsp;&nbsp;/&nbsp;&nbsp;RADIO
         </div>
 
-
       </section>
-
 
 
       <!-- FOOTER -->
 
       <footer class="footer">
 
-
         <div class="genres">
 
           SOUL
-          &nbsp;&nbsp;/
-          &nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
           BLUES
-          &nbsp;&nbsp;/
-          &nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
           REGGAE
-          &nbsp;&nbsp;/
-          &nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
           CLASSICS
 
         </div>
 
-
         <div class="tagline">
-
           music without borders
-
         </div>
-
 
       </footer>
 
-
     </main>
-
 
   </div>
 
 
-
-  <!-- RADIO -->
+  <!-- RADIO AUDIO -->
 
   <audio
     id="radio"
@@ -664,76 +528,43 @@
   ></audio>
 
 
+  <!-- JAVASCRIPT -->
 
   <script>
-
 
     const radio =
       document.getElementById("radio");
 
-
     const button =
       document.getElementById("playButton");
-
-
-    /*
-      GERÇEK RADYO YAYINI
-
-      Yayın adresimizi bulduğumuzda
-      buraya ekleyeceğiz.
-
-      Örnek:
-
-      radio.src = "https://.....";
-
-    */
 
 
     button.addEventListener(
       "click",
       function () {
 
-
         if (!radio.src) {
-
-          alert(
-            "OIDARCHE yayını hazırlanıyor 🎧"
-          );
-
           return;
-
         }
-
 
         if (radio.paused) {
 
-
           radio.play();
 
-
-          button.classList.add(
-            "playing"
-          );
-
+          button.classList.add("playing");
 
         } else {
 
-
           radio.pause();
 
-
-          button.classList.remove(
-            "playing"
-          );
+          button.classList.remove("playing");
 
         }
 
       }
     );
 
-
   </script>
-
 
 </body>
 </html>
