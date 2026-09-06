@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>OIDARCHE — Radio</title>
 
   <style>
@@ -18,729 +12,866 @@
     body {
       width: 100%;
       min-height: 100%;
+      background: #090807;
     }
 
     body {
-      background: #090807;
+      min-height: 100vh;
+      background: #061a22;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
       color: #ede8db;
-      font-family: Inter, Arial, Helvetica, sans-serif;
       overflow-x: hidden;
     }
-
-    /* =========================
-       MAIN PAGE
-    ========================= */
 
     .page {
       width: 100%;
       min-height: 100vh;
       background: #090807;
-      padding: 0 4.45vw 30px;
+      padding: 0 4.45vw 35px;
     }
 
-    .container {
-      width: 100%;
-      max-width: 1312px;
-      margin: 0 auto;
-    }
+    /* HEADER */
 
-    /* =========================
-       HEADER
-    ========================= */
-
-    header {
+    .header {
       height: 124px;
       position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      border-bottom: 1px solid #2e2b26;
     }
 
     .logo {
       position: absolute;
-      width: 210px;
-      height: 89px;
-      top: 21px;
-      left: 50%;
-      transform: translateX(-50%);
-      object-fit: contain;
-    }
-
-    .header-divider {
-      position: absolute;
       left: 0;
-      right: 0;
-      bottom: 0;
-      height: 1px;
-      background: #2e2b26;
+      top: 28px;
+      width: 180px;
+      height: auto;
+      z-index: 10;
     }
 
-    /* =========================
-       HERO / GIF AREA
-    ========================= */
+    .on-air {
+      position: absolute;
+      right: 0;
+      bottom: 27px;
+
+      color: #00bbff;
+
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+
+      white-space: nowrap;
+    }
+
+    /* HERO / GIF */
 
     .hero {
       position: relative;
+
       width: 100%;
-      height: 540px;
+      height: min(540px, 37.5vw);
+      min-height: 320px;
+
       margin-top: 20px;
-      background: #1c1b18;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
       overflow: hidden;
+
       border-radius: 2px;
+
+      background: #1c1b18;
     }
 
+    .hero-gif {
+    /* GIF ARKA PLAN */
     .background-gif {
       position: absolute;
+
       inset: 0;
+
       width: 100%;
       height: 100%;
+
       object-fit: cover;
+
       display: block;
+      opacity: 0.42;
+      z-index: 0;
     }
 
-    /*
-      Figma'daki koyu overlay.
-      GIF yoksa da arka plan Figma'daki gibi
-      koyu kalır.
-    */
-    .gif-overlay {
+    .hero-overlay {
+    .overlay {
       position: absolute;
+
       inset: 0;
+
       background: rgba(5, 5, 5, 0.18);
-      z-index: 2;
+      background: rgba(3, 20, 27, 0.58);
+      z-index: 1;
     }
 
-    /* =========================
-       FIGMA TEXT
-    ========================= */
-
-    .insert-title {
+    .gif-label {
       position: absolute;
-      z-index: 3;
+
       top: 24px;
       left: 24px;
 
+    .content {
+      position: relative;
+      z-index: 2;
+
       color: #ede8db;
+
       font-size: 13px;
       font-weight: 600;
+
       letter-spacing: 2px;
-      line-height: 30px;
+      width: 100%;
+      max-width: 850px;
+      text-align: center;
     }
 
-    .insert-description {
+    .gif-description {
       position: absolute;
-      z-index: 3;
+
       top: 50px;
       left: 24px;
 
+      z-index: 2;
+
       color: #a69e91;
+
       font-size: 12px;
-      font-weight: 400;
-      line-height: 30px;
+    /* LOGO */
+    .logo {
+      width: 190px;
+      max-width: 65vw;
+      height: auto;
+      margin-bottom: 22px;
     }
 
-    /* =========================
-       PLAY CONTROL
-    ========================= */
+    /* PLAY BUTTON */
 
-    .play-control {
+    .play-button {
       position: absolute;
-      z-index: 5;
+
+      top: 50%;
+      left: 50%;
+
+      transform: translate(-50%, -50%);
 
       width: 140px;
       height: 140px;
 
-      left: 50%;
-      top: 50%;
-
-      transform: translate(-50%, -50%);
-
       border: none;
+
       background: transparent;
 
       cursor: pointer;
 
+      z-index: 5;
+
       display: flex;
+
+    .on-air {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-
-      padding: 0;
+      gap: 9px;
+      font-size: 12px;
+      letter-spacing: 4px;
+      margin-bottom: 28px;
+      opacity: 0.9;
     }
-
-    /*
-      Figma'daki mavi dairesel play kontrolü
-    */
 
     .play-ring {
       position: absolute;
+
       width: 140px;
       height: 140px;
 
+    .dot {
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
 
-      border: 3px solid #00b7ff;
+      border: 4px solid transparent;
 
-      border-left-color: transparent;
-      border-bottom-color: transparent;
+      border-right-color: #00bbff;
 
-      transform: rotate(45deg);
+      transform: rotate(-45deg);
 
-      transition:
-        transform 0.25s ease,
-        opacity 0.25s ease;
+      transition: all 0.35s ease;
     }
 
-    .play-control:hover .play-ring {
-      transform: rotate(45deg) scale(1.04);
-    }
-
-    .play-icon {
-      position: relative;
-      z-index: 2;
-
+    .play-triangle {
       width: 0;
       height: 0;
 
-      border-top: 14px solid transparent;
-      border-bottom: 14px solid transparent;
-      border-left: 22px solid #ffffff;
+      border-top: 16px solid transparent;
+      border-bottom: 16px solid transparent;
 
-      margin-left: 7px;
+      border-left: 24px solid white;
 
-      transition: all 0.2s ease;
+      margin-left: 8px;
+
+      transition: transform 0.35s ease;
     }
 
-    /* Çalarken STOP */
-
-    .play-control.playing .play-ring {
-      animation: rotateRing 3s linear infinite;
+    .play-button:hover .play-ring {
+      transform: rotate(-45deg) scale(1.05);
     }
 
-    @keyframes rotateRing {
-      from {
-        transform: rotate(45deg);
-      }
-
-      to {
-        transform: rotate(405deg);
-      }
+    .play-button:hover .play-triangle {
+      transform: scale(1.08);
     }
 
-    .play-control.playing .play-icon {
-      width: 18px;
-      height: 25px;
+    .play-button.playing .play-ring {
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    .play-button.playing .play-triangle {
+
+      width: 20px;
+      height: 26px;
 
       border: none;
 
-      margin-left: 0;
+      border-left: 6px solid white;
+      border-right: 6px solid white;
 
-      background:
-        linear-gradient(
-          to right,
-          #ffffff 0,
-          #ffffff 6px,
-          transparent 6px,
-          transparent 12px,
-          #ffffff 12px,
-          #ffffff 18px
-        );
+      margin-left: 0;
+      background: #ffffff;
+      box-shadow: 0 0 14px rgba(255,255,255,0.8);
+      animation: pulse 1.4s infinite;
     }
 
-    /* =========================
-       NOW PLAYING
-    ========================= */
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: .75;
+        transform: rotate(-45deg) scale(1);
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: rotate(-45deg) scale(1.06);
+        opacity: 0.35;
+        transform: scale(0.7);
+      }
+
+    }
+
+    /* NOW PLAYING */
 
     .now-playing {
-      margin-top: 21px;
+
+      position: relative;
+
+      padding-top: 25px;
+      padding-bottom: 18px;
+
+      border-bottom: 1px solid #2e2b26;
+    /* PLAY */
+    .play-button {
+      width: 105px;
+      height: 105px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 38px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+      margin-bottom: 34px;
     }
 
-    .now-playing-label {
-      color: #00b7ff;
+    .now-label {
+    .play-button:hover {
+      transform: scale(1.06);
+      background: rgba(255,255,255,0.16);
+    }
 
+      color: #00bbff;
+    .play-button:active {
+      transform: scale(0.96);
+    }
+
+    /* NOW PLAYING */
+    .now-playing-label {
       font-size: 11px;
       font-weight: 600;
 
       letter-spacing: 2px;
-
-      line-height: 30px;
+      letter-spacing: 4px;
+      opacity: 0.65;
+      margin-bottom: 12px;
     }
 
     .song-title {
+      font-size: clamp(26px, 5vw, 48px);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .track {
+
       color: #ede8db;
 
       font-size: 25px;
       font-weight: 600;
 
-      letter-spacing: 0.5px;
-
-      line-height: 32px;
-
-      min-height: 32px;
-
-      max-width: 800px;
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      letter-spacing: .5px;
+    .artist {
+      font-size: clamp(15px, 2vw, 20px);
+      opacity: 0.72;
+      margin-bottom: 30px;
     }
 
-    /* =========================
-       FOOTER
-    ========================= */
+    .station {
+
+      position: absolute;
+
+      right: 0;
+      bottom: 17px;
+
+      color: #a69e91;
+
+      font-size: 11px;
+      font-weight: 600;
+
+      letter-spacing: 1.5px;
+    .status {
+      min-height: 20px;
+      font-size: 12px;
+      opacity: 0.55;
+    }
+
+    /* FOOTER */
 
     .footer {
-      position: relative;
 
-      margin-top: 13px;
+      display: flex;
 
-      padding-top: 21px;
+      justify-content: space-between;
+      align-items: center;
 
-      border-top: 1px solid #2e2b26;
+      padding-top: 20px;
+    /* GEÇMİŞ */
+    .history {
+      margin: 35px auto 0;
+      max-width: 600px;
+      text-align: left;
+      padding: 22px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
 
-      min-height: 80px;
+    .genres,
+    .tagline {
+
+      color: #a69e91;
+
+      font-size: 11px;
+      font-weight: 400;
+    .history-title {
+      font-size: 10px;
+      letter-spacing: 3px;
+      opacity: 0.55;
+      margin-bottom: 14px;
+      text-align: center;
     }
 
     .genres {
-      color: #a69e91;
-
-      font-size: 11px;
-      font-weight: 400;
-
       letter-spacing: 1.2px;
-
-      line-height: 30px;
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 13px;
     }
 
-    .motto {
-      position: absolute;
-      right: 0;
-      top: 21px;
-
-      color: #a69e91;
-
-      font-size: 11px;
-      font-weight: 400;
-
-      letter-spacing: 0.8px;
-
-      line-height: 30px;
-
+    .tagline {
+      letter-spacing: .8px;
+    .history-artist {
+      opacity: 0.6;
       text-align: right;
     }
 
-    /* =========================
-       HIDDEN AUDIO
-    ========================= */
+    /* MOBILE */
 
-    audio {
-      display: none;
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 800px) {
+    @media (max-width: 700px) {
 
       .page {
         padding: 0 20px 25px;
+    @media (max-width: 600px) {
+      .logo {
+        width: 150px;
       }
 
-      header {
-        height: 105px;
+      .header {
+      .play-button {
+        width: 90px;
+        height: 90px;
+        font-size: 32px;
       }
 
       .logo {
-        width: 170px;
-        height: 72px;
-        top: 15px;
+        width: 130px;
+        top: 20px;
+      .history {
+        padding: 15px;
+      }
+
+      .on-air {
+        bottom: 18px;
+        font-size: 10px;
+      .history-item {
+        flex-direction: column;
+        gap: 3px;
       }
 
       .hero {
-        height: 58vw;
-        min-height: 320px;
-        max-height: 540px;
-        margin-top: 15px;
-      }
 
-      .insert-title {
-        top: 18px;
-        left: 18px;
-        font-size: 11px;
-      }
+        margin-top: 14px;
 
-      .insert-description {
-        top: 42px;
-        left: 18px;
-        right: 18px;
-        font-size: 10px;
-      }
+        height: 62vw;
 
-      .play-control {
-        width: 110px;
-        height: 110px;
-      }
-
-      .play-ring {
-        width: 110px;
-        height: 110px;
-      }
-
-      .song-title {
-        font-size: 21px;
-      }
-
-      .motto {
-        position: static;
+        min-height: 280px;
+      .history-artist {
         text-align: left;
-        margin-top: 5px;
       }
     }
-
-    @media (max-width: 480px) {
-
-      .page {
-        padding-left: 14px;
-        padding-right: 14px;
-      }
-
-      header {
-        height: 92px;
-      }
-
-      .logo {
-        width: 145px;
-        height: 62px;
-        top: 12px;
-      }
-
-      .hero {
-        height: 70vh;
-        min-height: 330px;
-        max-height: 500px;
-      }
-
-      .insert-title {
-        font-size: 10px;
-        letter-spacing: 1.5px;
-      }
-
-      .insert-description {
-        font-size: 9px;
-        line-height: 18px;
-        max-width: 260px;
-      }
-
-      .play-control {
-        width: 100px;
-        height: 100px;
-      }
-
-      .play-ring {
-        width: 100px;
-        height: 100px;
-      }
-
-      .now-playing {
-        margin-top: 16px;
-      }
-
-      .song-title {
-        font-size: 19px;
-      }
-
-      .genres {
-        font-size: 9px;
-        letter-spacing: 0.8px;
-      }
-
-      .motto {
-        font-size: 9px;
-      }
-    }
-
   </style>
 </head>
 
+      .gif-label {
 <body>
 
+        font-size: 10px;
   <div class="page">
 
-    <div class="container">
+        top: 18px;
+        left: 18px;
+      }
+    <!-- GIF -->
+    <img
+      class="background-gif"
+      src="gif sunset.gif"
+      alt=""
+    >
 
-      <!-- =========================
-           HEADER
-      ========================== -->
+      .gif-description {
+    <div class="overlay"></div>
 
-      <header>
+        font-size: 9px;
+    <main class="content">
 
-        <img
-          class="logo"
-          src="Vector mavi.png"
-          alt="oidARche"
-        >
+        top: 38px;
+        left: 18px;
+      }
+      <!-- LOGO -->
+      <img
+        class="logo"
+        src="Vector mavi.png"
+        alt="OIDARCHE"
+      >
 
-        <div class="header-divider"></div>
+      .play-button,
+      .play-ring {
+      <!-- ON AIR -->
+      <div class="on-air">
+        <span class="dot"></span>
+        <span>ON AIR</span>
+      </div>
 
-      </header>
+        width: 100px;
+        height: 100px;
+      }
+      <!-- PLAY BUTTON -->
+      <button
+        class="play-button"
+        id="playButton"
+        aria-label="Radyoyu oynat"
+      >
+        ▶
+      </button>
 
+      .play-triangle {
+      <!-- NOW PLAYING -->
+      <div class="now-playing-label">
+        NOW PLAYING
+      </div>
 
-      <!-- =========================
-           HERO
-      ========================== -->
+        border-top-width: 12px;
+        border-bottom-width: 12px;
+      <div
+        class="song-title"
+        id="songTitle"
+      >
+        Oidarche Radio
+      </div>
 
-      <section class="hero">
+        border-left-width: 18px;
+      }
+      <div
+        class="artist"
+        id="artistName"
+      >
+        Night Soul
+      </div>
 
-        <!-- Senin mevcut GIF'in -->
-        <img
-          class="background-gif"
-          src="gif sunset.gif"
-          alt=""
-        >
+      .now-playing {
+        padding-top: 20px;
+      }
+      <div
+        class="status"
+        id="status"
+      >
+        Hazırlanıyor...
+      </div>
 
-        <div class="gif-overlay"></div>
+      .track {
+        font-size: 19px;
+      }
+      <!-- SONG HISTORY -->
+      <section class="history">
 
-
-        <!-- Figma'daki yazılar -->
-
-        <div class="insert-title">
-          INSERT / REPLACE GIF
+      .station {
+        <div class="history-title">
+          RECENTLY PLAYED
         </div>
 
-        <div class="insert-description">
-          The central motion image can be replaced later without changing the layout.
+        position: static;
+        <div id="historyList">
+          <div class="history-item">
+            <span>Yükleniyor...</span>
+          </div>
         </div>
 
-
-        <!-- PLAY -->
-
-        <button
-          class="play-control"
-          id="playButton"
-          aria-label="Play radio"
-        >
-
-          <span class="play-ring"></span>
-
-          <span class="play-icon"></span>
-
-        </button>
-
+        margin-top: 12px;
       </section>
 
+        font-size: 9px;
+      }
+    </main>
 
-      <!-- =========================
-           NOW PLAYING
-      ========================== -->
-
-      <section class="now-playing">
-
-        <div class="now-playing-label">
-          NOW PLAYING
-        </div>
-
-        <div
-          class="song-title"
-          id="songTitle"
-        >
-          Artist — Track Title
-        </div>
-
-      </section>
-
-
-      <!-- =========================
-           FOOTER
-      ========================== -->
-
-      <footer class="footer">
-
-        <div class="genres">
-          SOUL&nbsp;&nbsp; / &nbsp;&nbsp;BLUES&nbsp;&nbsp; / &nbsp;&nbsp;REGGAE&nbsp;&nbsp; / &nbsp;&nbsp;CLASSICS
-        </div>
-
-        <div class="motto">
-          music without borders
-        </div>
-
-      </footer>
-
-    </div>
-
+      .footer {
   </div>
 
-
-  <!-- =========================
-       RADIO
-  ========================== -->
-
+        flex-direction: column;
+  <!-- RADYO SESİ -->
   <audio
     id="radio"
     preload="none"
   ></audio>
 
+        align-items: flex-start;
 
+        gap: 14px;
+      }
   <script>
 
+      .genres,
+      .tagline {
+        font-size: 9px;
+      }
+    /*
+      OIDARCHE RADIO
+      AzuraCast bağlantısı
+    */
+
+    }
     const radio = document.getElementById("radio");
     const playButton = document.getElementById("playButton");
 
+  </style>
+</head>
     const songTitle = document.getElementById("songTitle");
-
+    const artistName = document.getElementById("artistName");
+    const status = document.getElementById("status");
+    const historyList = document.getElementById("historyList");
 
     /*
-      SENİN ÇALIŞAN RADYO ADRESİN
+      AZURACAST YAYINI
     */
 
- const STREAM_URL =
-  "https://172.23.169.201:8000/radio.mp3";
+<body>
+    const STREAM_URL =
+      "http://172.23.169.201:8000/radio.mp3";
 
-const API_URL =
-  "https://172.23.169.201/api/nowplaying/oidarche";
-
-
+  <div class="page">
     /*
       AZURACAST NOW PLAYING API
     */
 
+    <!-- HEADER -->
     const API_URL =
       "http://172.23.169.201/api/nowplaying/oidarche";
 
+    <header class="header">
 
-    /* =========================
-       PLAY / STOP
-    ========================== */
+      <img
+        class="logo"
+        src="Vector%20mavi.png"
+        alt="OIDARCHE"
+      >
+    /*
+      PLAY / PAUSE
+    */
 
+      <div class="on-air">
+        ●&nbsp;&nbsp;ON AIR
+      </div>
     playButton.addEventListener("click", async () => {
 
-      /*
-        RADYO ÇALIYORSA DURDUR
-      */
+    </header>
+      if (radio.paused) {
 
-      if (!radio.paused) {
+        radio.src = STREAM_URL;
+
+    <!-- MAIN -->
+        try {
+
+    <main>
+          await radio.play();
+
+      <!-- GIF AREA -->
+          playButton.textContent = "❚❚";
+          status.textContent = "Oidarche Radio çalıyor";
+
+      <section class="hero">
+        } catch (error) {
+
+        <img
+          class="hero-gif"
+          id="heroGif"
+          src="gif%20sunset.gif"
+          alt="Oidarche visual"
+        >
+          console.error(error);
+
+        <div class="hero-overlay"></div>
+          status.textContent =
+            "Yayın başlatılamadı.";
+
+        <div class="gif-label">
+          OIDARCHE RADIO
+        </div>
+        }
+
+        <div class="gif-description">
+          music without borders
+        </div>
+      } else {
 
         radio.pause();
 
-        playButton.classList.remove("playing");
+        <!-- PLAY BUTTON -->
+        playButton.textContent = "▶";
 
-        return;
+        <button
+          class="play-button"
+          id="playButton"
+          aria-label="Play Oidarche Radio"
+        >
+        status.textContent =
+          "Yayın duraklatıldı.";
+
+          <span class="play-ring"></span>
       }
 
-
-      /*
-        RADYO DURUYORSA BAŞLAT
-      */
-
-      radio.src = STREAM_URL;
-
-      try {
-
-        await radio.play();
-
-        playButton.classList.add("playing");
-
-      } catch (error) {
-
-        console.error(
-          "Radio playback error:",
-          error
-        );
-
-      }
-
+          <span class="play-triangle"></span>
     });
 
+        </button>
 
-    /* =========================
-       NOW PLAYING
-    ========================== */
+      </section>
+    /*
+      NOW PLAYING BİLGİSİNİ AL
+    */
 
     async function updateNowPlaying() {
 
+      <!-- NOW PLAYING -->
       try {
 
+      <section class="now-playing">
         const response =
           await fetch(
             API_URL + "?_=" + Date.now()
           );
 
-
+        <div class="now-label">
+          NOW PLAYING
+        </div>
         if (!response.ok) {
-          throw new Error(
-            "Now Playing API error"
-          );
+          throw new Error("API bağlantısı başarısız");
         }
 
-
+        <div
+          class="track"
+          id="track"
+        >
+          Oidarche Radio — Night Soul
+        </div>
         const data =
           await response.json();
 
-
+        <div class="station">
+          NIGHT SOUL&nbsp;&nbsp;/&nbsp;&nbsp;RADIO
+        </div>
         if (
           data.now_playing &&
           data.now_playing.song
         ) {
 
+      </section>
           const song =
             data.now_playing.song;
 
+          songTitle.textContent =
+            song.title || "Bilinmeyen parça";
 
-          const artist =
-            song.artist || "";
+      <!-- FOOTER -->
+          artistName.textContent =
+            song.artist || "Bilinmeyen sanatçı";
 
+      <footer class="footer">
+          status.textContent =
+            "Oidarche Radio";
 
-          const title =
-            song.title || "";
+        <div class="genres">
+        }
 
+          SOUL
+          &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+          BLUES
+          &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+          REGGAE
+          &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+          CLASSICS
+        /*
+          ŞARKI GEÇMİŞİ
+        */
 
-          /*
-            Figma'daki:
+        </div>
+        if (
+          data.song_history &&
+          data.song_history.length
+        ) {
 
-            Artist — Track Title
+        <div class="tagline">
+          music without borders
+        </div>
+          historyList.innerHTML = "";
 
-            yapısını koruyoruz.
-          */
+      </footer>
+          data.song_history
+            .slice(0, 5)
+            .forEach(item => {
 
-          if (artist && title) {
+    </main>
+              if (
+                !item.song
+              ) {
+                return;
+              }
 
-            songTitle.textContent =
-              artist + " — " + title;
+  </div>
+              const row =
+                document.createElement("div");
 
-          } else if (title) {
+              row.className =
+                "history-item";
 
-            songTitle.textContent =
-              title;
+  <!-- RADIO AUDIO -->
+              const title =
+                document.createElement("span");
 
-          } else {
+  <audio
+    id="radio"
+    preload="none"
+  ></audio>
+              title.textContent =
+                item.song.title || "";
 
-            songTitle.textContent =
-              "Artist — Track Title";
+              const artist =
+                document.createElement("span");
 
-          }
+  <!-- JAVASCRIPT -->
+              artist.className =
+                "history-artist";
+
+  <script>
+              artist.textContent =
+                item.song.artist || "";
+
+    const radio =
+      document.getElementById("radio");
+              row.appendChild(title);
+              row.appendChild(artist);
+
+  radio.src = "http://172.23.169.201:8000/radio.mp3";
+              historyList.appendChild(row);
+
+    const button =
+      document.getElementById("playButton");
+            });
 
         }
 
+    button.addEventListener(
+      "click",
+      function () {
       } catch (error) {
 
+        if (!radio.src) {
+          return;
+        }
         console.error(
           "Now Playing hatası:",
           error
         );
 
+        if (radio.paused) {
+        status.textContent =
+          "Şarkı bilgisi bekleniyor...";
+
+          radio.play();
       }
 
+          button.classList.add("playing");
     }
 
+        } else {
 
+          radio.pause();
     /*
-      Sayfa açılır açılmaz şarkıyı al
+      SAYFA AÇILDIĞINDA ÇEK
     */
 
+          button.classList.remove("playing");
     updateNowPlaying();
 
+        }
 
+      }
     /*
-      Her 5 saniyede bir güncelle
+      HER 5 SANİYEDE BİR KONTROL ET
     */
 
     setInterval(
@@ -748,28 +879,4 @@ const API_URL =
       5000
     );
 
-
-    /*
-      Yayın doğal olarak durursa
-      butonu tekrar PLAY yap
-    */
-
-    radio.addEventListener(
-      "pause",
-      () => {
-
-        if (radio.currentTime > 0) {
-
-          playButton.classList.remove(
-            "playing"
-          );
-
-        }
-
-      }
-    );
-
   </script>
-
-</body>
-</html>
