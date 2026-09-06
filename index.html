@@ -535,39 +535,65 @@
 
   <!-- JAVASCRIPT -->
 
+   <!-- JAVASCRIPT -->
+
   <script>
 
-    const radio =
-      document.getElementById("radio");
+    const radio = document.getElementById("radio");
+    const button = document.getElementById("playButton");
+    const track = document.getElementById("track");
 
-    const button =
-      document.getElementById("playButton");
+    button.addEventListener("click", function () {
 
+      if (radio.paused) {
 
-    button.addEventListener(
-      "click",
-      function () {
+        radio.play()
+          .then(() => {
+            button.classList.add("playing");
+          })
+          .catch(error => {
+            console.log("Radio playback error:", error);
+          });
 
-        if (!radio.src) {
-          return;
-        }
+      } else {
 
-        if (radio.paused) {
-
-          radio.play();
-
-          button.classList.add("playing");
-
-        } else {
-
-          radio.pause();
-
-          button.classList.remove("playing");
-
-        }
+        radio.pause();
+        button.classList.remove("playing");
 
       }
-    );
+
+    });
+
+
+    /* NOW PLAYING */
+
+    async function updateNowPlaying() {
+
+      try {
+
+        const response = await fetch(
+          "http://172.23.169.201/api/nowplaying/oidarche"
+        );
+
+        const data = await response.json();
+
+        const artist = data.now_playing.song.artist;
+        const title = data.now_playing.song.title;
+
+        track.textContent = artist + " — " + title;
+
+      } catch (error) {
+
+        console.log("Now Playing error:", error);
+
+      }
+
+    }
+
+
+    updateNowPlaying();
+
+    setInterval(updateNowPlaying, 15000);
 
   </script>
 
