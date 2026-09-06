@@ -557,7 +557,6 @@ button.addEventListener("click", function () {
   } else {
 
     radio.pause();
-
     button.classList.remove("playing");
 
   }
@@ -571,44 +570,50 @@ async function updateNowPlaying() {
 
   try {
 
-  const response = await fetch(
-  "https://strain-pee-bandwidth-promote.trycloudflare.com/api/nowplaying/oidarche"
-);
+    const response = await fetch(
+      "https://strain-pee-bandwidth-promote.trycloudflare.com/api/nowplaying/oidarche",
+      {
+        cache: "no-store"
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("API HTTP " + response.status);
+    }
 
     const data = await response.json();
 
-    const artist =
-      data.now_playing.song.artist;
+    const song = data?.now_playing?.song;
 
-    const title =
-      data.now_playing.song.title;
+    if (!song) {
+      console.log("Now Playing bilgisi bulunamadı.");
+      return;
+    }
 
-    track.textContent =
-      artist + " — " + title;
+    const artist = song.artist || "";
+    const title = song.title || "";
+
+    track.textContent = artist + " — " + title;
+
+    console.log("NOW PLAYING:", artist, "-", title);
 
   } catch (error) {
 
-    console.log(
-      "Now Playing error:",
-      error
-    );
+    console.error("Now Playing error:", error);
 
   }
 
 }
 
 
-/* İlk yüklemede çalıştır */
+/* İlk açılış */
 
 updateNowPlaying();
 
 
-/* Her 15 saniyede güncelle */
+/* Her 10 saniyede kontrol */
 
-setInterval(
-  updateNowPlaying,
-  15000
-);
+setInterval(updateNowPlaying, 10000);
 
 </script>
 </body>
