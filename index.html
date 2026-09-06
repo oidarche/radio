@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,365 +13,196 @@
       padding: 0;
     }
 
-    html,
     body {
-      width: 100%;
-      min-height: 100%;
-      background: #090807;
-    }
-
-    body {
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      color: #ede8db;
+      min-height: 100vh;
+      background: #061a22;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
       overflow-x: hidden;
     }
 
-    /* =========================
-       PAGE
-    ========================= */
-
     .page {
-      width: 100%;
       min-height: 100vh;
-      background: #090807;
-    }
-
-    .container {
-      width: calc(100% - 128px);
-      max-width: 1312px;
-      margin: 0 auto;
-    }
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    .header {
-      height: 124px;
       position: relative;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-    }
-
-    .logo {
-      width: 210px;
-      height: 89px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .header-divider {
-      height: 1px;
-      background: #2e2b26;
-      width: 100%;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-    }
-
-    /* =========================
-       HERO / GIF
-    ========================= */
-
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 540px;
-      margin-top: 20px;
-      background: #1c1b18;
+      padding: 40px 20px;
       overflow: hidden;
-      border-radius: 2px;
     }
 
-    .hero-gif {
+    /* GIF ARKA PLAN */
+    .background-gif {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
+      opacity: 0.42;
+      z-index: 0;
     }
 
-    /*
-      Figma'daki koyu overlay.
-      GIF'in görüntüsü tamamen kaybolmasın diye
-      sadece hafif karartıyoruz.
-    */
-    .hero-overlay {
+    .overlay {
       position: absolute;
       inset: 0;
-      background: rgba(5, 5, 5, 0.18);
-      pointer-events: none;
+      background: rgba(3, 20, 27, 0.58);
+      z-index: 1;
     }
 
-    /* =========================
-       GIF TEXT
-    ========================= */
-
-    .gif-label {
-      position: absolute;
-      top: 24px;
-      left: 24px;
-
-      color: #ede8db;
-
-      font-size: 13px;
-      line-height: 30px;
-      font-weight: 600;
-      letter-spacing: 2px;
-
-      z-index: 3;
+    .content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 850px;
+      text-align: center;
     }
 
-    .gif-description {
-      position: absolute;
-      top: 50px;
-      left: 24px;
+    /* LOGO */
+    .logo {
+      width: 190px;
+      max-width: 65vw;
+      height: auto;
+      margin-bottom: 22px;
+    }
 
-      color: #a69e91;
-
+    .on-air {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
       font-size: 12px;
-      line-height: 30px;
-      font-weight: 400;
-
-      z-index: 3;
+      letter-spacing: 4px;
+      margin-bottom: 28px;
+      opacity: 0.9;
     }
 
-    /* =========================
-       PLAY BUTTON
-    ========================= */
-
-    .play-button {
-      position: absolute;
-
-      left: 50%;
-      top: 50%;
-
-      width: 140px;
-      height: 140px;
-
-      transform: translate(-50%, -50%);
-
-      border: 2px solid #00bbff;
-      border-left-color: transparent;
-
+    .dot {
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 14px rgba(255,255,255,0.8);
+      animation: pulse 1.4s infinite;
+    }
 
-      background: transparent;
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
 
+      50% {
+        opacity: 0.35;
+        transform: scale(0.7);
+      }
+    }
+
+    /* PLAY */
+    .play-button {
+      width: 105px;
+      height: 105px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 38px;
       cursor: pointer;
-
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-
-      z-index: 5;
-
-      transition:
-        transform 0.25s ease,
-        border-color 0.25s ease;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+      margin-bottom: 34px;
     }
 
     .play-button:hover {
-      transform: translate(-50%, -50%) scale(1.03);
+      transform: scale(1.06);
+      background: rgba(255,255,255,0.16);
     }
 
-    .play-icon {
-      width: 0;
-      height: 0;
-
-      border-top: 14px solid transparent;
-      border-bottom: 14px solid transparent;
-      border-left: 22px solid #ffffff;
-
-      margin-left: 7px;
+    .play-button:active {
+      transform: scale(0.96);
     }
 
-    .play-button.playing {
-      border-left-color: #00bbff;
-      animation: spin 3s linear infinite;
-    }
-
-    .play-button.playing .play-icon {
-      width: 18px;
-      height: 28px;
-      border: none;
-      margin-left: 0;
-
-      position: relative;
-    }
-
-    .play-button.playing .play-icon::before,
-    .play-button.playing .play-icon::after {
-      content: "";
-      position: absolute;
-      top: 0;
-
-      width: 5px;
-      height: 28px;
-
-      background: #ffffff;
-    }
-
-    .play-button.playing .play-icon::before {
-      left: 0;
-    }
-
-    .play-button.playing .play-icon::after {
-      right: 0;
-    }
-
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* =========================
-       NOW PLAYING
-    ========================= */
-
-    .now-playing {
-      padding-top: 22px;
-      padding-bottom: 14px;
-    }
-
-    .now-label {
-      color: #00bbff;
-
+    /* NOW PLAYING */
+    .now-playing-label {
       font-size: 11px;
-      line-height: 30px;
-      font-weight: 600;
-
-      letter-spacing: 2px;
+      letter-spacing: 4px;
+      opacity: 0.65;
+      margin-bottom: 12px;
     }
 
-    .track {
-      color: #ede8db;
-
-      font-size: 25px;
-      line-height: 32.5px;
-      font-weight: 600;
-
-      letter-spacing: 0.5px;
-
-      min-height: 33px;
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .song-title {
+      font-size: clamp(26px, 5vw, 48px);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 8px;
     }
 
-    /* =========================
-       FOOTER
-    ========================= */
+    .artist {
+      font-size: clamp(15px, 2vw, 20px);
+      opacity: 0.72;
+      margin-bottom: 30px;
+    }
 
-    .footer {
-      border-top: 1px solid #2e2b26;
+    .status {
+      min-height: 20px;
+      font-size: 12px;
+      opacity: 0.55;
+    }
 
-      min-height: 110px;
+    /* GEÇMİŞ */
+    .history {
+      margin: 35px auto 0;
+      max-width: 600px;
+      text-align: left;
+      padding: 22px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
 
+    .history-title {
+      font-size: 10px;
+      letter-spacing: 3px;
+      opacity: 0.55;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .history-item {
       display: flex;
-      align-items: flex-start;
       justify-content: space-between;
-
-      padding-top: 22px;
+      gap: 20px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 13px;
     }
 
-    .genres {
-      color: #a69e91;
-
-      font-size: 11px;
-      line-height: 30px;
-      font-weight: 400;
-
-      letter-spacing: 1.2px;
-    }
-
-    .tagline {
-      color: #a69e91;
-
-      font-size: 11px;
-      line-height: 30px;
-      font-weight: 400;
-
-      letter-spacing: 0.8px;
-
+    .history-artist {
+      opacity: 0.6;
       text-align: right;
     }
 
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 700px) {
-
-      .container {
-        width: calc(100% - 32px);
-      }
-
-      .header {
-        height: 100px;
-      }
-
+    @media (max-width: 600px) {
       .logo {
-        width: 170px;
-        height: 72px;
-      }
-
-      .hero {
-        height: 56vw;
-        min-height: 300px;
-        max-height: 540px;
-        margin-top: 16px;
-      }
-
-      .gif-label {
-        top: 18px;
-        left: 18px;
-        font-size: 11px;
-      }
-
-      .gif-description {
-        top: 43px;
-        left: 18px;
-        right: 18px;
-
-        font-size: 10px;
-        line-height: 16px;
+        width: 150px;
       }
 
       .play-button {
-        width: 100px;
-        height: 100px;
+        width: 90px;
+        height: 90px;
+        font-size: 32px;
       }
 
-      .play-icon {
-        border-top-width: 11px;
-        border-bottom-width: 11px;
-        border-left-width: 18px;
+      .history {
+        padding: 15px;
       }
 
-      .now-playing {
-        padding-top: 18px;
-      }
-
-      .track {
-        font-size: 20px;
-      }
-
-      .footer {
+      .history-item {
         flex-direction: column;
-        gap: 8px;
-        padding-bottom: 20px;
+        gap: 3px;
       }
 
-      .tagline {
+      .history-artist {
         text-align: left;
       }
     }
@@ -380,106 +211,87 @@
 
 <body>
 
-  <main class="page">
+  <div class="page">
 
-    <!-- =========================
-         HEADER
-    ========================== -->
+    <!-- GIF -->
+    <img
+      class="background-gif"
+      src="gif sunset.gif"
+      alt=""
+    >
 
-    <header class="header container">
+    <div class="overlay"></div>
 
+    <main class="content">
+
+      <!-- LOGO -->
       <img
         class="logo"
-        src="Vector%20mavi.png"
-        alt="Oidarche"
+        src="Vector mavi.png"
+        alt="OIDARCHE"
       >
 
-      <div class="header-divider"></div>
-
-    </header>
-
-
-    <!-- =========================
-         HERO
-    ========================== -->
-
-    <section class="hero container">
-
-      <img
-        class="hero-gif"
-        src="gif%20sunset.gif"
-        alt=""
-      >
-
-      <div class="hero-overlay"></div>
-
-
-      <div class="gif-label">
-        INSERT / REPLACE GIF
+      <!-- ON AIR -->
+      <div class="on-air">
+        <span class="dot"></span>
+        <span>ON AIR</span>
       </div>
 
-      <div class="gif-description">
-        The central motion image can be replaced later without changing the layout.
-      </div>
-
-
-      <!-- PLAY -->
-
+      <!-- PLAY BUTTON -->
       <button
-        id="playButton"
         class="play-button"
-        aria-label="Play radio"
-        type="button"
+        id="playButton"
+        aria-label="Radyoyu oynat"
       >
-        <span class="play-icon"></span>
+        ▶
       </button>
 
-    </section>
-
-
-    <!-- =========================
-         NOW PLAYING
-    ========================== -->
-
-    <section class="now-playing container">
-
-      <div class="now-label">
+      <!-- NOW PLAYING -->
+      <div class="now-playing-label">
         NOW PLAYING
       </div>
 
       <div
-        id="track"
-        class="track"
+        class="song-title"
+        id="songTitle"
       >
-        Artist — Track Title
+        Oidarche Radio
       </div>
 
-    </section>
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
-    <footer class="footer container">
-
-      <div class="genres">
-        SOUL&nbsp;&nbsp; / &nbsp;&nbsp;BLUES&nbsp;&nbsp; / &nbsp;&nbsp;REGGAE&nbsp;&nbsp; / &nbsp;&nbsp;CLASSICS
+      <div
+        class="artist"
+        id="artistName"
+      >
+        Night Soul
       </div>
 
-      <div class="tagline">
-        music without borders
+      <div
+        class="status"
+        id="status"
+      >
+        Hazırlanıyor...
       </div>
 
-    </footer>
+      <!-- SONG HISTORY -->
+      <section class="history">
 
-  </main>
+        <div class="history-title">
+          RECENTLY PLAYED
+        </div>
 
+        <div id="historyList">
+          <div class="history-item">
+            <span>Yükleniyor...</span>
+          </div>
+        </div>
 
-  <!-- =========================
-       AUDIO
-  ========================== -->
+      </section>
 
+    </main>
+
+  </div>
+
+  <!-- RADYO SESİ -->
   <audio
     id="radio"
     preload="none"
@@ -488,93 +300,77 @@
 
   <script>
 
-    /* ==========================================
-       OIDARCHE RADIO CONFIG
-    ========================================== */
+    /*
+      OIDARCHE RADIO
+      AzuraCast bağlantısı
+    */
+
+    const radio = document.getElementById("radio");
+    const playButton = document.getElementById("playButton");
+
+    const songTitle = document.getElementById("songTitle");
+    const artistName = document.getElementById("artistName");
+    const status = document.getElementById("status");
+    const historyList = document.getElementById("historyList");
+
+    /*
+      AZURACAST YAYINI
+    */
 
     const STREAM_URL =
       "http://172.23.169.201:8000/radio.mp3";
+
+    /*
+      AZURACAST NOW PLAYING API
+    */
 
     const API_URL =
       "http://172.23.169.201/api/nowplaying/oidarche";
 
 
-    /* ==========================================
-       ELEMENTS
-    ========================================== */
-
-    const radio =
-      document.getElementById("radio");
-
-    const playButton =
-      document.getElementById("playButton");
-
-    const track =
-      document.getElementById("track");
-
-
-    /* ==========================================
-       AUDIO SOURCE
-    ========================================== */
-
-    radio.src = STREAM_URL;
-
-
-    /* ==========================================
-       PLAY / PAUSE
-    ========================================== */
+    /*
+      PLAY / PAUSE
+    */
 
     playButton.addEventListener("click", async () => {
 
-      try {
+      if (radio.paused) {
 
-        if (radio.paused) {
+        radio.src = STREAM_URL;
+
+        try {
 
           await radio.play();
 
-          playButton.classList.add("playing");
+          playButton.textContent = "❚❚";
+          status.textContent = "Oidarche Radio çalıyor";
 
-        } else {
+        } catch (error) {
 
-          radio.pause();
+          console.error(error);
 
-          playButton.classList.remove("playing");
+          status.textContent =
+            "Yayın başlatılamadı.";
 
         }
 
-      } catch (error) {
+      } else {
 
-        console.error(
-          "Radio could not be started:",
-          error
-        );
+        radio.pause();
+
+        playButton.textContent = "▶";
+
+        status.textContent =
+          "Yayın duraklatıldı.";
 
       }
 
     });
 
 
-    /* ==========================================
-       AUDIO EVENTS
-    ========================================== */
-
-    radio.addEventListener("play", () => {
-
-      playButton.classList.add("playing");
-
-    });
-
-
-    radio.addEventListener("pause", () => {
-
-      playButton.classList.remove("playing");
-
-    });
-
-
-    /* ==========================================
-       NOW PLAYING
-    ========================================== */
+    /*
+      NOW PLAYING BİLGİSİNİ AL
+    */
 
     async function updateNowPlaying() {
 
@@ -582,81 +378,115 @@
 
         const response =
           await fetch(
-            API_URL,
-            {
-              cache: "no-store"
-            }
+            API_URL + "?_=" + Date.now()
           );
 
         if (!response.ok) {
-          throw new Error(
-            "API response: " +
-            response.status
-          );
+          throw new Error("API bağlantısı başarısız");
         }
 
         const data =
           await response.json();
 
-
         if (
-          data &&
           data.now_playing &&
           data.now_playing.song
         ) {
 
-          const artist =
-            data.now_playing.song.artist || "";
+          const song =
+            data.now_playing.song;
 
-          const title =
-            data.now_playing.song.title || "";
+          songTitle.textContent =
+            song.title || "Bilinmeyen parça";
 
+          artistName.textContent =
+            song.artist || "Bilinmeyen sanatçı";
 
-          if (artist && title) {
+          status.textContent =
+            "Oidarche Radio";
 
-            track.textContent =
-              artist + " — " + title;
+        }
 
-          } else if (title) {
+        /*
+          ŞARKI GEÇMİŞİ
+        */
 
-            track.textContent =
-              title;
+        if (
+          data.song_history &&
+          data.song_history.length
+        ) {
 
-          } else {
+          historyList.innerHTML = "";
 
-            track.textContent =
-              "Artist — Track Title";
+          data.song_history
+            .slice(0, 5)
+            .forEach(item => {
 
-          }
+              if (
+                !item.song
+              ) {
+                return;
+              }
+
+              const row =
+                document.createElement("div");
+
+              row.className =
+                "history-item";
+
+              const title =
+                document.createElement("span");
+
+              title.textContent =
+                item.song.title || "";
+
+              const artist =
+                document.createElement("span");
+
+              artist.className =
+                "history-artist";
+
+              artist.textContent =
+                item.song.artist || "";
+
+              row.appendChild(title);
+              row.appendChild(artist);
+
+              historyList.appendChild(row);
+
+            });
 
         }
 
       } catch (error) {
 
-        console.log(
-          "Now Playing could not be updated:",
+        console.error(
+          "Now Playing hatası:",
           error
         );
+
+        status.textContent =
+          "Şarkı bilgisi bekleniyor...";
 
       }
 
     }
 
 
-    /* ==========================================
-       INITIAL UPDATE
-    ========================================== */
+    /*
+      SAYFA AÇILDIĞINDA ÇEK
+    */
 
     updateNowPlaying();
 
 
-    /* ==========================================
-       UPDATE EVERY 10 SECONDS
-    ========================================== */
+    /*
+      HER 5 SANİYEDE BİR KONTROL ET
+    */
 
     setInterval(
       updateNowPlaying,
-      10000
+      5000
     );
 
   </script>
