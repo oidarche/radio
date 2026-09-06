@@ -7,304 +7,562 @@
   <title>OIDARCHE — Radio</title>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+    html,
     body {
-      min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at 50% 35%, #183d4d 0%, #0b1d27 35%, #05090d 75%);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .noise {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.08;
-      background-image:
-        radial-gradient(#ffffff 0.6px, transparent 0.6px);
-      background-size: 5px 5px;
-    }
-
-    .container {
       width: 100%;
-      max-width: 900px;
+      min-height: 100%;
+      background: #090807;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #ede8db;
+    }
+
+    .page {
+      width: 100%;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 25px;
+      background: #090807;
+      padding: 0 4.45vw 35px;
+    }
+
+    /* HEADER */
+
+    .header {
+      height: 124px;
       position: relative;
-      z-index: 2;
+      border-bottom: 1px solid #2e2b26;
     }
 
     .logo {
-      font-size: clamp(38px, 8vw, 76px);
-      font-weight: 300;
-      letter-spacing: 0.22em;
-      margin-left: 0.22em;
-      margin-bottom: 15px;
+      position: absolute;
+      left: 0;
+      top: 28px;
+      width: 180px;
+      height: auto;
+      z-index: 10;
     }
 
-    .subtitle {
-      font-size: 11px;
-      letter-spacing: 0.45em;
-      text-transform: uppercase;
-      opacity: 0.55;
-      margin-left: 0.45em;
+    .on-air {
+      position: absolute;
+      right: 0;
+      bottom: 27px;
+
+      color: #00bbff;
+
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+
+      white-space: nowrap;
     }
 
-    .player {
-      margin-top: 70px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    /* HERO / GIF */
+
+    .hero {
+      position: relative;
+
+      width: 100%;
+      height: min(540px, 37.5vw);
+      min-height: 320px;
+
+      margin-top: 20px;
+
+      overflow: hidden;
+
+      border-radius: 2px;
+
+      background: #1c1b18;
     }
 
-    .play {
-      width: 105px;
-      height: 105px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.45);
-      background: rgba(255,255,255,0.04);
-      color: white;
-      font-size: 27px;
+    .hero-gif {
+      position: absolute;
+
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+    }
+
+    .hero-overlay {
+      position: absolute;
+
+      inset: 0;
+
+      background: rgba(5, 5, 5, 0.18);
+    }
+
+    .gif-label {
+      position: absolute;
+
+      top: 24px;
+      left: 24px;
+
+      z-index: 2;
+
+      color: #ede8db;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      letter-spacing: 2px;
+    }
+
+    .gif-description {
+      position: absolute;
+
+      top: 50px;
+      left: 24px;
+
+      z-index: 2;
+
+      color: #a69e91;
+
+      font-size: 12px;
+    }
+
+    /* PLAY BUTTON */
+
+    .play-button {
+      position: absolute;
+
+      top: 50%;
+      left: 50%;
+
+      transform: translate(-50%, -50%);
+
+      width: 140px;
+      height: 140px;
+
+      border: none;
+
+      background: transparent;
+
       cursor: pointer;
+
+      z-index: 5;
+
       display: flex;
+
       align-items: center;
       justify-content: center;
-      transition: all 0.4s ease;
-      backdrop-filter: blur(8px);
     }
 
-    .play:hover {
+    .play-ring {
+      position: absolute;
+
+      width: 140px;
+      height: 140px;
+
+      border-radius: 50%;
+
+      border: 4px solid transparent;
+
+      border-right-color: #00bbff;
+
+      transform: rotate(-45deg);
+
+      transition: all 0.35s ease;
+    }
+
+    .play-triangle {
+      width: 0;
+      height: 0;
+
+      border-top: 16px solid transparent;
+      border-bottom: 16px solid transparent;
+
+      border-left: 24px solid white;
+
+      margin-left: 8px;
+
+      transition: transform 0.35s ease;
+    }
+
+    .play-button:hover .play-ring {
+      transform: rotate(-45deg) scale(1.05);
+    }
+
+    .play-button:hover .play-triangle {
       transform: scale(1.08);
-      background: rgba(255,255,255,0.12);
-      border-color: white;
     }
 
-    .play.playing {
-      box-shadow:
-        0 0 0 12px rgba(255,255,255,0.03),
-        0 0 50px rgba(80,180,210,0.25);
+    .play-button.playing .play-ring {
+      animation: pulse 2s infinite ease-in-out;
     }
 
-    .status {
-      margin-top: 25px;
-      font-size: 10px;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      opacity: 0.5;
-    }
+    .play-button.playing .play-triangle {
 
-    .track {
-      margin-top: 45px;
-      text-align: center;
-      min-height: 55px;
-    }
+      width: 20px;
+      height: 26px;
 
-    .now {
-      font-size: 10px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      opacity: 0.4;
-      margin-bottom: 12px;
-    }
+      border: none;
 
-    .song {
-      font-size: 19px;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-    }
+      border-left: 6px solid white;
+      border-right: 6px solid white;
 
-    .artist {
-      margin-top: 8px;
-      font-size: 12px;
-      opacity: 0.5;
-      letter-spacing: 0.12em;
-    }
-
-    .bottom {
-      position: fixed;
-      bottom: 35px;
-      display: flex;
-      gap: 35px;
-      font-size: 10px;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      opacity: 0.45;
-    }
-
-    .bottom a {
-      color: white;
-      text-decoration: none;
-      transition: opacity 0.3s;
-    }
-
-    .bottom a:hover {
-      opacity: 1;
-    }
-
-    .waves {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      border: 1px solid rgba(255,255,255,0.025);
-      border-radius: 50%;
-      animation: pulse 7s infinite ease-in-out;
-    }
-
-    .waves::before,
-    .waves::after {
-      content: "";
-      position: absolute;
-      inset: 60px;
-      border: 1px solid rgba(255,255,255,0.025);
-      border-radius: 50%;
-    }
-
-    .waves::after {
-      inset: 120px;
+      margin-left: 0;
     }
 
     @keyframes pulse {
-      0%, 100% {
-        transform: scale(0.9);
-        opacity: 0.4;
+
+      0%,
+      100% {
+        opacity: .75;
+        transform: rotate(-45deg) scale(1);
       }
 
       50% {
-        transform: scale(1.08);
-        opacity: 0.8;
+        opacity: 1;
+        transform: rotate(-45deg) scale(1.06);
       }
+
     }
 
-    @media (max-width: 600px) {
-      .logo {
-        font-size: 38px;
-        letter-spacing: 0.15em;
+    /* NOW PLAYING */
+
+    .now-playing {
+
+      position: relative;
+
+      padding-top: 25px;
+      padding-bottom: 18px;
+
+      border-bottom: 1px solid #2e2b26;
+    }
+
+    .now-label {
+
+      color: #00bbff;
+
+      font-size: 11px;
+      font-weight: 600;
+
+      letter-spacing: 2px;
+
+      margin-bottom: 8px;
+    }
+
+    .track {
+
+      color: #ede8db;
+
+      font-size: 25px;
+      font-weight: 600;
+
+      letter-spacing: .5px;
+    }
+
+    .station {
+
+      position: absolute;
+
+      right: 0;
+      bottom: 17px;
+
+      color: #a69e91;
+
+      font-size: 11px;
+      font-weight: 600;
+
+      letter-spacing: 1.5px;
+    }
+
+    /* FOOTER */
+
+    .footer {
+
+      display: flex;
+
+      justify-content: space-between;
+      align-items: center;
+
+      padding-top: 20px;
+    }
+
+    .genres,
+    .tagline {
+
+      color: #a69e91;
+
+      font-size: 11px;
+      font-weight: 400;
+    }
+
+    .genres {
+      letter-spacing: 1.2px;
+    }
+
+    .tagline {
+      letter-spacing: .8px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
+
+      .page {
+        padding: 0 20px 25px;
       }
 
-      .subtitle {
-        font-size: 9px;
-      }
-
-      .waves {
-        width: 420px;
-        height: 420px;
-      }
-
-      .play {
-        width: 90px;
+      .header {
         height: 90px;
       }
 
-      .bottom {
-        bottom: 25px;
+      .logo {
+        width: 130px;
+        top: 20px;
       }
+
+      .on-air {
+        bottom: 18px;
+        font-size: 10px;
+      }
+
+      .hero {
+
+        margin-top: 14px;
+
+        height: 62vw;
+
+        min-height: 280px;
+      }
+
+      .gif-label {
+
+        font-size: 10px;
+
+        top: 18px;
+        left: 18px;
+      }
+
+      .gif-description {
+
+        font-size: 9px;
+
+        top: 38px;
+        left: 18px;
+      }
+
+      .play-button,
+      .play-ring {
+
+        width: 100px;
+        height: 100px;
+      }
+
+      .play-triangle {
+
+        border-top-width: 12px;
+        border-bottom-width: 12px;
+
+        border-left-width: 18px;
+      }
+
+      .now-playing {
+        padding-top: 20px;
+      }
+
+      .track {
+        font-size: 19px;
+      }
+
+      .station {
+
+        position: static;
+
+        margin-top: 12px;
+
+        font-size: 9px;
+      }
+
+      .footer {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 14px;
+      }
+
+      .genres,
+      .tagline {
+        font-size: 9px;
+      }
+
     }
+
   </style>
 </head>
 
+
 <body>
 
-  <div class="noise"></div>
+  <div class="page">
 
-  <div class="waves"></div>
+    <!-- HEADER -->
 
-  <main class="container">
+    <header class="header">
 
-    <div class="logo">OIDARCHE</div>
+      <img
+        class="logo"
+        src="Vector%20mavi.png"
+        alt="OIDARCHE"
+      >
 
-    <div class="subtitle">
-      independent radio
-    </div>
-
-    <div class="player">
-
-      <button class="play" id="playButton" aria-label="Play radio">
-        ▶
-      </button>
-
-      <div class="status" id="status">
-        offline
+      <div class="on-air">
+        ●&nbsp;&nbsp;ON AIR
       </div>
 
-      <div class="track">
+    </header>
 
-        <div class="now">
-          now playing
+
+    <!-- MAIN -->
+
+    <main>
+
+      <!-- GIF AREA -->
+
+      <section class="hero">
+
+        <img
+          class="hero-gif"
+          id="heroGif"
+          src="gif%20sunset.gif"
+          alt="Oidarche visual"
+        >
+
+        <div class="hero-overlay"></div>
+
+        <div class="gif-label">
+          OIDARCHE RADIO
         </div>
 
-        <div class="song" id="song">
-          Oidarche Radio
+        <div class="gif-description">
+          music without borders
         </div>
 
-        <div class="artist" id="artist">
-          music for another state of mind
+
+        <!-- PLAY BUTTON -->
+
+        <button
+          class="play-button"
+          id="playButton"
+          aria-label="Play Oidarche Radio"
+        >
+
+          <span class="play-ring"></span>
+
+          <span class="play-triangle"></span>
+
+        </button>
+
+      </section>
+
+
+      <!-- NOW PLAYING -->
+
+      <section class="now-playing">
+
+        <div class="now-label">
+          NOW PLAYING
         </div>
 
-      </div>
+        <div
+          class="track"
+          id="track"
+        >
+          Oidarche Radio — Night Soul
+        </div>
 
-    </div>
+        <div class="station">
+          NIGHT SOUL&nbsp;&nbsp;/&nbsp;&nbsp;RADIO
+        </div>
 
-  </main>
+      </section>
 
-  <div class="bottom">
-    <a href="#" id="instagram">instagram</a>
-    <span>∞</span>
-    <a href="#">oidarche</a>
+
+      <!-- FOOTER -->
+
+      <footer class="footer">
+
+        <div class="genres">
+
+          SOUL
+          &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+          BLUES
+          &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+          REGGAE
+          &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+          CLASSICS
+
+        </div>
+
+        <div class="tagline">
+          music without borders
+        </div>
+
+      </footer>
+
+    </main>
+
   </div>
 
-  <audio id="radio" preload="none"></audio>
+
+  <!-- RADIO AUDIO -->
+
+  <audio
+    id="radio"
+    preload="none"
+  ></audio>
+
+
+  <!-- JAVASCRIPT -->
 
   <script>
 
-    /*
-      BURAYA RADYO YAYIN ADRESİMİZİ KOYACAĞIZ.
-      Şimdilik boş bırakıyoruz.
-    */
+    const radio =
+      document.getElementById("radio");
 
-    const radio = document.getElementById("radio");
-    const button = document.getElementById("playButton");
-    const status = document.getElementById("status");
+    const button =
+      document.getElementById("playButton");
 
-    button.addEventListener("click", function () {
 
-      if (!radio.src) {
-        status.textContent = "coming soon";
-        return;
-      }
+    button.addEventListener(
+      "click",
+      function () {
 
-      if (radio.paused) {
+        if (!radio.src) {
+          return;
+        }
 
-        radio.play();
+        if (radio.paused) {
 
-        button.textContent = "❚❚";
-        button.classList.add("playing");
-        status.textContent = "live";
+          radio.play();
 
-      } else {
+          button.classList.add("playing");
 
-        radio.pause();
+        } else {
 
-        button.textContent = "▶";
-        button.classList.remove("playing");
-        status.textContent = "paused";
+          radio.pause();
+
+          button.classList.remove("playing");
+
+        }
 
       }
-
-    });
+    );
 
   </script>
 
