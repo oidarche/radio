@@ -1,968 +1,772 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>OIDARCHE — Radio</title>
+  <title>OIDARCHE — Radio</title>
 
-<style>
+  <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html,
-body {
-    width: 100%;
-    min-height: 100%;
-}
-
-body {
-    background: #1e1e1e;
-    color: #f4f1ea;
-    font-family: 'Montserrat', Arial, sans-serif;
-    overflow-x: hidden;
-}
-
-/* =========================
-   PAGE
-========================= */
-
-.page {
-    min-height: 100vh;
-    position: relative;
-    padding: 34px 48px 30px;
-    display: flex;
-    flex-direction: column;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    z-index: 10;
-}
-
-.logo {
-    width: 145px;
-    height: auto;
-    object-fit: contain;
-}
-
-nav {
-    display: flex;
-    gap: 42px;
-    align-items: center;
-}
-
-nav a {
-    color: #f4f1ea;
-    text-decoration: none;
-    font-size: 10px;
-    letter-spacing: 2.8px;
-    font-weight: 500;
-    opacity: .78;
-    transition: opacity .3s ease;
-}
-
-nav a:hover {
-    opacity: 1;
-}
-
-/* =========================
-   MAIN
-========================= */
-
-.main {
-    flex: 1;
-    min-height: calc(100vh - 120px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-/* =========================
-   VISUALIZER
-========================= */
-
-.visualizer {
-    width: min(700px, 85vw);
-    height: min(390px, 48vw);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* horizontal waveform */
-
-.wave {
-    position: absolute;
-    width: 100%;
-    height: 110px;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: .7;
-}
-
-.wave::before,
-.wave::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: #a8a29a;
-    opacity: .35;
-}
-
-.wave::before {
-    top: 31px;
-}
-
-.wave::after {
-    bottom: 31px;
-}
-
-.wave-line {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-}
-
-.wave-line span {
-    position: absolute;
-    display: block;
-    width: 1px;
-    background: #a8a29a;
-    opacity: .55;
-    transform-origin: center;
-}
-
-/* waveform bars */
-
-.wave-line span:nth-child(1) {left: 3%;height:12px;top:49px}
-.wave-line span:nth-child(2) {left: 5%;height:24px;top:43px}
-.wave-line span:nth-child(3) {left: 7%;height:17px;top:46px}
-.wave-line span:nth-child(4) {left: 9%;height:34px;top:37px}
-.wave-line span:nth-child(5) {left:11%;height:22px;top:44px}
-.wave-line span:nth-child(6) {left:13%;height:48px;top:31px}
-.wave-line span:nth-child(7) {left:15%;height:29px;top:40px}
-.wave-line span:nth-child(8) {left:17%;height:55px;top:27px}
-.wave-line span:nth-child(9) {left:19%;height:33px;top:38px}
-.wave-line span:nth-child(10){left:21%;height:43px;top:33px}
-.wave-line span:nth-child(11){left:23%;height:19px;top:45px}
-.wave-line span:nth-child(12){left:25%;height:65px;top:22px}
-.wave-line span:nth-child(13){left:27%;height:38px;top:35px}
-.wave-line span:nth-child(14){left:29%;height:72px;top:16px}
-.wave-line span:nth-child(15){left:31%;height:44px;top:33px}
-.wave-line span:nth-child(16){left:33%;height:60px;top:25px}
-.wave-line span:nth-child(17){left:35%;height:28px;top:41px}
-.wave-line span:nth-child(18){left:37%;height:77px;top:12px}
-.wave-line span:nth-child(19){left:39%;height:47px;top:31px}
-.wave-line span:nth-child(20){left:41%;height:30px;top:40px}
-.wave-line span:nth-child(21){left:43%;height:88px;top:4px}
-.wave-line span:nth-child(22){left:45%;height:58px;top:26px}
-.wave-line span:nth-child(23){left:47%;height:35px;top:38px}
-.wave-line span:nth-child(24){left:49%;height:100px;top:-1px}
-.wave-line span:nth-child(25){left:51%;height:42px;top:34px}
-.wave-line span:nth-child(26){left:53%;height:74px;top:18px}
-.wave-line span:nth-child(27){left:55%;height:45px;top:32px}
-.wave-line span:nth-child(28){left:57%;height:31px;top:40px}
-.wave-line span:nth-child(29){left:59%;height:83px;top:8px}
-.wave-line span:nth-child(30){left:61%;height:50px;top:30px}
-.wave-line span:nth-child(31){left:63%;height:67px;top:21px}
-.wave-line span:nth-child(32){left:65%;height:36px;top:37px}
-.wave-line span:nth-child(33){left:67%;height:78px;top:11px}
-.wave-line span:nth-child(34){left:69%;height:41px;top:34px}
-.wave-line span:nth-child(35){left:71%;height:58px;top:26px}
-.wave-line span:nth-child(36){left:73%;height:28px;top:41px}
-.wave-line span:nth-child(37){left:75%;height:69px;top:20px}
-.wave-line span:nth-child(38){left:77%;height:43px;top:33px}
-.wave-line span:nth-child(39){left:79%;height:25px;top:42px}
-.wave-line span:nth-child(40){left:81%;height:55px;top:28px}
-.wave-line span:nth-child(41){left:83%;height:35px;top:37px}
-.wave-line span:nth-child(42){left:85%;height:48px;top:31px}
-.wave-line span:nth-child(43){left:87%;height:22px;top:44px}
-.wave-line span:nth-child(44){left:89%;height:37px;top:36px}
-.wave-line span:nth-child(45){left:91%;height:20px;top:45px}
-.wave-line span:nth-child(46){left:93%;height:31px;top:40px}
-.wave-line span:nth-child(47){left:95%;height:17px;top:46px}
-.wave-line span:nth-child(48){left:97%;height:12px;top:49px}
-
-/* =========================
-   RIPPLE CIRCLES
-========================= */
-
-.rings {
-    width: 285px;
-    height: 285px;
-    position: absolute;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.ring {
-    position: absolute;
-    border: 1px solid rgba(244,241,234,.36);
-    border-radius: 50%;
-}
-
-.ring:nth-child(1) {
-    width: 280px;
-    height: 280px;
-}
-
-.ring:nth-child(2) {
-    width: 240px;
-    height: 240px;
-    opacity: .8;
-}
-
-.ring:nth-child(3) {
-    width: 200px;
-    height: 200px;
-    opacity: .65;
-}
-
-.ring:nth-child(4) {
-    width: 160px;
-    height: 160px;
-    opacity: .5;
-}
-
-.ring:nth-child(5) {
-    width: 120px;
-    height: 120px;
-    opacity: .35;
-}
-
-/* center mark */
-
-.center-mark {
-    position: absolute;
-    width: 92px;
-    height: 92px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.center-mark::before {
-    content: "";
-    position: absolute;
-    width: 70px;
-    height: 70px;
-    border: 1px solid #f4f1ea;
-    border-radius: 50%;
-    opacity: .9;
-}
-
-.center-mark span {
-    position: relative;
-    z-index: 2;
-    font-size: 27px;
-    font-weight: 500;
-    letter-spacing: -3px;
-}
-
-/* =========================
-   PLAY BUTTON
-========================= */
-
-.play-button {
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 74px;
-    height: 74px;
-    border-radius: 50%;
-    border: 1px solid rgba(244,241,234,.75);
-    background: #1e1e1e;
-    color: #f4f1ea;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 17px;
-    transition: all .3s ease;
-    z-index: 5;
-}
-
-.play-button:hover {
-    transform: translateX(-50%) scale(1.08);
-    background: #292929;
-}
-
-.play-button.playing {
-    border-color: #5d7df7;
-    color: #5d7df7;
-}
-
-/* =========================
-   NOW PLAYING
-========================= */
-
-.now-playing {
-    margin-top: 48px;
-    text-align: center;
-}
-
-.now-label {
-    font-size: 9px;
-    letter-spacing: 4px;
-    color: #a8a29a;
-    margin-bottom: 16px;
-}
-
-.track {
-    font-size: clamp(20px, 3vw, 32px);
-    font-weight: 400;
-    letter-spacing: -.5px;
-    color: #f4f1ea;
-}
-
-.live {
-    margin-top: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    font-size: 9px;
-    letter-spacing: 3px;
-    color: #a8a29a;
-}
-
-.live-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: #a3c48f;
-    box-shadow: 0 0 8px rgba(163,196,143,.8);
-}
-
-/* =========================
-   PLAYER CONTROLS
-========================= */
-
-.controls {
-    width: min(650px, 80vw);
-    margin: 55px auto 0;
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.volume-icon {
-    width: 16px;
-    opacity: .7;
-    font-size: 14px;
-}
-
-.volume {
-    flex: 1;
-    height: 2px;
-    background: rgba(244,241,234,.25);
-    position: relative;
-}
-
-.volume-progress {
-    width: 35%;
-    height: 2px;
-    background: #f4f1ea;
-}
-
-.volume-knob {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #5d7df7;
-    top: -3px;
-    left: 35%;
-}
-
-.menu {
-    font-size: 18px;
-    opacity: .7;
-    letter-spacing: 2px;
-}
-
-/* =========================
-   STATUS
-========================= */
-
-.status {
-    position: fixed;
-    bottom: 22px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: #a8a29a;
-    opacity: .6;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 700px) {
-
-    .page {
-        padding: 24px 20px;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      background: #090807;
+      color: #ede8db;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       MAIN PAGE
+    ========================= */
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      background: #090807;
+      padding: 0 4.45vw 30px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1312px;
+      margin: 0 auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
-        align-items: flex-start;
+      height: 124px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
     }
 
     .logo {
-        width: 110px;
+      position: absolute;
+      width: 210px;
+      height: 89px;
+      top: 21px;
+      left: 50%;
+      transform: translateX(-50%);
+      object-fit: contain;
     }
 
-    nav {
-        gap: 14px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        max-width: 220px;
+    .header-divider {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: #2e2b26;
     }
 
-    nav a {
-        font-size: 8px;
-        letter-spacing: 1.8px;
+    /* =========================
+       HERO / GIF AREA
+    ========================= */
+
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 540px;
+      margin-top: 20px;
+      background: #1c1b18;
+      overflow: hidden;
+      border-radius: 2px;
     }
 
-    .visualizer {
-        width: 100vw;
-        height: 300px;
+    .background-gif {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    .rings {
-        width: 220px;
-        height: 220px;
+    /*
+      Figma'daki koyu overlay.
+      GIF yoksa da arka plan Figma'daki gibi
+      koyu kalır.
+    */
+    .gif-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(5, 5, 5, 0.18);
+      z-index: 2;
     }
 
-    .ring:nth-child(1) {
-        width: 220px;
-        height: 220px;
+    /* =========================
+       FIGMA TEXT
+    ========================= */
+
+    .insert-title {
+      position: absolute;
+      z-index: 3;
+      top: 24px;
+      left: 24px;
+
+      color: #ede8db;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      line-height: 30px;
     }
 
-    .ring:nth-child(2) {
-        width: 185px;
-        height: 185px;
+    .insert-description {
+      position: absolute;
+      z-index: 3;
+      top: 50px;
+      left: 24px;
+
+      color: #a69e91;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 30px;
     }
 
-    .ring:nth-child(3) {
-        width: 150px;
-        height: 150px;
+    /* =========================
+       PLAY CONTROL
+    ========================= */
+
+    .play-control {
+      position: absolute;
+      z-index: 5;
+
+      width: 140px;
+      height: 140px;
+
+      left: 50%;
+      top: 50%;
+
+      transform: translate(-50%, -50%);
+
+      border: none;
+      background: transparent;
+
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 0;
     }
 
-    .ring:nth-child(4) {
-        width: 115px;
-        height: 115px;
+    /*
+      Figma'daki mavi dairesel play kontrolü
+    */
+
+    .play-ring {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+
+      border-radius: 50%;
+
+      border: 3px solid #00b7ff;
+
+      border-left-color: transparent;
+      border-bottom-color: transparent;
+
+      transform: rotate(45deg);
+
+      transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
     }
 
-    .ring:nth-child(5) {
-        width: 80px;
-        height: 80px;
+    .play-control:hover .play-ring {
+      transform: rotate(45deg) scale(1.04);
     }
 
-    .center-mark::before {
-        width: 58px;
-        height: 58px;
+    .play-icon {
+      position: relative;
+      z-index: 2;
+
+      width: 0;
+      height: 0;
+
+      border-top: 14px solid transparent;
+      border-bottom: 14px solid transparent;
+      border-left: 22px solid #ffffff;
+
+      margin-left: 7px;
+
+      transition: all 0.2s ease;
     }
 
-    .center-mark span {
-        font-size: 21px;
+    /* Çalarken STOP */
+
+    .play-control.playing .play-ring {
+      animation: rotateRing 3s linear infinite;
     }
 
-    .play-button {
-        width: 64px;
-        height: 64px;
+    @keyframes rotateRing {
+      from {
+        transform: rotate(45deg);
+      }
+
+      to {
+        transform: rotate(405deg);
+      }
     }
+
+    .play-control.playing .play-icon {
+      width: 18px;
+      height: 25px;
+
+      border: none;
+
+      margin-left: 0;
+
+      background:
+        linear-gradient(
+          to right,
+          #ffffff 0,
+          #ffffff 6px,
+          transparent 6px,
+          transparent 12px,
+          #ffffff 12px,
+          #ffffff 18px
+        );
+    }
+
+    /* =========================
+       NOW PLAYING
+    ========================= */
 
     .now-playing {
-        margin-top: 32px;
+      margin-top: 21px;
     }
 
-    .track {
+    .now-playing-label {
+      color: #00b7ff;
+
+      font-size: 11px;
+      font-weight: 600;
+
+      letter-spacing: 2px;
+
+      line-height: 30px;
+    }
+
+    .song-title {
+      color: #ede8db;
+
+      font-size: 25px;
+      font-weight: 600;
+
+      letter-spacing: 0.5px;
+
+      line-height: 32px;
+
+      min-height: 32px;
+
+      max-width: 800px;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .footer {
+      position: relative;
+
+      margin-top: 13px;
+
+      padding-top: 21px;
+
+      border-top: 1px solid #2e2b26;
+
+      min-height: 80px;
+    }
+
+    .genres {
+      color: #a69e91;
+
+      font-size: 11px;
+      font-weight: 400;
+
+      letter-spacing: 1.2px;
+
+      line-height: 30px;
+    }
+
+    .motto {
+      position: absolute;
+      right: 0;
+      top: 21px;
+
+      color: #a69e91;
+
+      font-size: 11px;
+      font-weight: 400;
+
+      letter-spacing: 0.8px;
+
+      line-height: 30px;
+
+      text-align: right;
+    }
+
+    /* =========================
+       HIDDEN AUDIO
+    ========================= */
+
+    audio {
+      display: none;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 800px) {
+
+      .page {
+        padding: 0 20px 25px;
+      }
+
+      header {
+        height: 105px;
+      }
+
+      .logo {
+        width: 170px;
+        height: 72px;
+        top: 15px;
+      }
+
+      .hero {
+        height: 58vw;
+        min-height: 320px;
+        max-height: 540px;
+        margin-top: 15px;
+      }
+
+      .insert-title {
+        top: 18px;
+        left: 18px;
+        font-size: 11px;
+      }
+
+      .insert-description {
+        top: 42px;
+        left: 18px;
+        right: 18px;
+        font-size: 10px;
+      }
+
+      .play-control {
+        width: 110px;
+        height: 110px;
+      }
+
+      .play-ring {
+        width: 110px;
+        height: 110px;
+      }
+
+      .song-title {
         font-size: 21px;
-        padding: 0 15px;
+      }
+
+      .motto {
+        position: static;
+        text-align: left;
+        margin-top: 5px;
+      }
     }
 
-    .controls {
-        width: 90%;
-        margin-top: 42px;
+    @media (max-width: 480px) {
+
+      .page {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      header {
+        height: 92px;
+      }
+
+      .logo {
+        width: 145px;
+        height: 62px;
+        top: 12px;
+      }
+
+      .hero {
+        height: 70vh;
+        min-height: 330px;
+        max-height: 500px;
+      }
+
+      .insert-title {
+        font-size: 10px;
+        letter-spacing: 1.5px;
+      }
+
+      .insert-description {
+        font-size: 9px;
+        line-height: 18px;
+        max-width: 260px;
+      }
+
+      .play-control {
+        width: 100px;
+        height: 100px;
+      }
+
+      .play-ring {
+        width: 100px;
+        height: 100px;
+      }
+
+      .now-playing {
+        margin-top: 16px;
+      }
+
+      .song-title {
+        font-size: 19px;
+      }
+
+      .genres {
+        font-size: 9px;
+        letter-spacing: 0.8px;
+      }
+
+      .motto {
+        font-size: 9px;
+      }
     }
 
-}
-
-/* =========================
-   PLAYING ANIMATION
-========================= */
-
-.playing .ring {
-    animation: breathe 2.8s ease-in-out infinite;
-}
-
-.playing .ring:nth-child(2) {
-    animation-delay: .2s;
-}
-
-.playing .ring:nth-child(3) {
-    animation-delay: .4s;
-}
-
-.playing .ring:nth-child(4) {
-    animation-delay: .6s;
-}
-
-.playing .ring:nth-child(5) {
-    animation-delay: .8s;
-}
-
-@keyframes breathe {
-
-    0%,100% {
-        transform: scale(1);
-        opacity: .35;
-    }
-
-    50% {
-        transform: scale(1.045);
-        opacity: .75;
-    }
-
-}
-
-</style>
+  </style>
 </head>
 
 <body>
 
-<div class="page">
+  <div class="page">
 
-    <!-- HEADER -->
+    <div class="container">
 
-    <header>
+      <!-- =========================
+           HEADER
+      ========================== -->
+
+      <header>
 
         <img
-            src="Vector mavi.png"
-            class="logo"
-            alt="OIDARCHE"
+          class="logo"
+          src="Vector mavi.png"
+          alt="oidARche"
         >
 
-        <nav>
-            <a href="#">RADIO</a>
-            <a href="#">ARCHIVE</a>
-            <a href="#">ABOUT</a>
-            <a href="#">CONTACT</a>
-        </nav>
+        <div class="header-divider"></div>
 
-    </header>
+      </header>
 
 
-    <!-- MAIN -->
+      <!-- =========================
+           HERO
+      ========================== -->
 
-    <main class="main">
+      <section class="hero">
+
+        <!-- Senin mevcut GIF'in -->
+        <img
+          class="background-gif"
+          src="gif sunset.gif"
+          alt=""
+        >
+
+        <div class="gif-overlay"></div>
+
+
+        <!-- Figma'daki yazılar -->
+
+        <div class="insert-title">
+          INSERT / REPLACE GIF
+        </div>
+
+        <div class="insert-description">
+          The central motion image can be replaced later without changing the layout.
+        </div>
+
+
+        <!-- PLAY -->
+
+        <button
+          class="play-control"
+          id="playButton"
+          aria-label="Play radio"
+        >
+
+          <span class="play-ring"></span>
+
+          <span class="play-icon"></span>
+
+        </button>
+
+      </section>
+
+
+      <!-- =========================
+           NOW PLAYING
+      ========================== -->
+
+      <section class="now-playing">
+
+        <div class="now-playing-label">
+          NOW PLAYING
+        </div>
 
         <div
-            class="visualizer"
-            id="visualizer"
+          class="song-title"
+          id="songTitle"
         >
-
-            <!-- WAVEFORM -->
-
-            <div class="wave">
-
-                <div class="wave-line">
-
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-
-                </div>
-
-            </div>
-
-
-            <!-- RINGS -->
-
-            <div
-                class="rings"
-                id="rings"
-            >
-
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-
-                <div class="center-mark">
-                    <span>AR</span>
-                </div>
-
-            </div>
-
-
-            <!-- PLAY -->
-
-            <button
-                class="play-button"
-                id="playButton"
-                aria-label="Radioyu başlat"
-            >
-                ▶
-            </button>
-
+          Artist — Track Title
         </div>
 
-
-        <!-- NOW PLAYING -->
-
-        <section class="now-playing">
-
-            <div class="now-label">
-                NOW PLAYING
-            </div>
-
-            <div
-                class="track"
-                id="track"
-            >
-                Oidarche Radio
-            </div>
-
-            <div class="live">
-
-                <span class="live-dot"></span>
-
-                <span>LIVE</span>
-
-            </div>
-
-        </section>
+      </section>
 
 
-        <!-- CONTROLS -->
+      <!-- =========================
+           FOOTER
+      ========================== -->
 
-        <div class="controls">
+      <footer class="footer">
 
-            <div class="volume-icon">
-                ◖)))
-            </div>
-
-            <div class="volume">
-
-                <div class="volume-progress"></div>
-
-                <div class="volume-knob"></div>
-
-            </div>
-
-            <div class="menu">
-                ···
-            </div>
-
+        <div class="genres">
+          SOUL&nbsp;&nbsp; / &nbsp;&nbsp;BLUES&nbsp;&nbsp; / &nbsp;&nbsp;REGGAE&nbsp;&nbsp; / &nbsp;&nbsp;CLASSICS
         </div>
 
-    </main>
+        <div class="motto">
+          music without borders
+        </div>
 
+      </footer>
 
-    <div
-        class="status"
-        id="status"
-    >
-        OIDARCHE RADIO
     </div>
 
-</div>
+  </div>
 
 
-<!-- AUDIO -->
+  <!-- =========================
+       RADIO
+  ========================== -->
 
-<audio
+  <audio
     id="radio"
     preload="none"
-></audio>
+  ></audio>
 
 
-<script>
+  <script>
 
-/* ==========================================
-   OIDARCHE RADIO
-========================================== */
+    const radio = document.getElementById("radio");
+    const playButton = document.getElementById("playButton");
 
-const radio =
-    document.getElementById("radio");
-
-const playButton =
-    document.getElementById("playButton");
-
-const track =
-    document.getElementById("track");
-
-const status =
-    document.getElementById("status");
-
-const visualizer =
-    document.getElementById("visualizer");
+    const songTitle = document.getElementById("songTitle");
 
 
-/* ==========================================
-   YAYIN ADRESİ
-========================================== */
+    /*
+      SENİN ÇALIŞAN RADYO ADRESİN
+    */
 
-const STREAM_URL =
-    "http://172.23.169.201:8000/radio.mp3";
-
-
-/* ==========================================
-   AZURACAST API
-========================================== */
-
-const API_URL =
-    "http://172.23.169.201/api/nowplaying/oidarche";
+    const STREAM_URL =
+      "http://172.23.169.201:8000/radio.mp3";
 
 
-/* ==========================================
-   PLAY / STOP
-========================================== */
+    /*
+      AZURACAST NOW PLAYING API
+    */
 
-playButton.addEventListener(
-    "click",
-    async () => {
-
-        if (radio.paused) {
-
-            try {
-
-                radio.src = STREAM_URL;
-
-                await radio.play();
-
-                playButton.textContent = "■";
-
-                playButton.classList.add(
-                    "playing"
-                );
-
-                visualizer.classList.add(
-                    "playing"
-                );
-
-                status.textContent =
-                    "PLAYING";
-
-            }
-
-            catch (error) {
-
-                console.error(error);
-
-                status.textContent =
-                    "YAYIN BAŞLATILAMADI";
-
-            }
-
-        }
-
-        else {
-
-            radio.pause();
-
-            radio.removeAttribute("src");
-
-            radio.load();
-
-            playButton.textContent = "▶";
-
-            playButton.classList.remove(
-                "playing"
-            );
-
-            visualizer.classList.remove(
-                "playing"
-            );
-
-            status.textContent =
-                "OIDARCHE RADIO";
-
-        }
-
-    }
-);
+    const API_URL =
+      "http://172.23.169.201/api/nowplaying/oidarche";
 
 
-/* ==========================================
-   NOW PLAYING
-========================================== */
+    /* =========================
+       PLAY / STOP
+    ========================== */
 
-async function updateNowPlaying() {
+    playButton.addEventListener("click", async () => {
 
-    try {
+      /*
+        RADYO ÇALIYORSA DURDUR
+      */
+
+      if (!radio.paused) {
+
+        radio.pause();
+
+        playButton.classList.remove("playing");
+
+        return;
+      }
+
+
+      /*
+        RADYO DURUYORSA BAŞLAT
+      */
+
+      radio.src = STREAM_URL;
+
+      try {
+
+        await radio.play();
+
+        playButton.classList.add("playing");
+
+      } catch (error) {
+
+        console.error(
+          "Radio playback error:",
+          error
+        );
+
+      }
+
+    });
+
+
+    /* =========================
+       NOW PLAYING
+    ========================== */
+
+    async function updateNowPlaying() {
+
+      try {
 
         const response =
-            await fetch(
-                API_URL +
-                "?_=" +
-                Date.now()
-            );
+          await fetch(
+            API_URL + "?_=" + Date.now()
+          );
+
 
         if (!response.ok) {
-            throw new Error(
-                "API bağlantısı başarısız"
-            );
+          throw new Error(
+            "Now Playing API error"
+          );
         }
 
+
         const data =
-            await response.json();
+          await response.json();
 
 
         if (
-            data.now_playing &&
-            data.now_playing.song
+          data.now_playing &&
+          data.now_playing.song
         ) {
 
-            const song =
-                data.now_playing.song;
+          const song =
+            data.now_playing.song;
 
 
-            const artist =
-                song.artist || "";
+          const artist =
+            song.artist || "";
 
 
-            const title =
-                song.title ||
-                "Bilinmeyen parça";
+          const title =
+            song.title || "";
 
 
-            if (artist) {
+          /*
+            Figma'daki:
 
-                track.textContent =
-                    artist +
-                    " — " +
-                    title;
+            Artist — Track Title
 
-            }
+            yapısını koruyoruz.
+          */
 
-            else {
+          if (artist && title) {
 
-                track.textContent =
-                    title;
+            songTitle.textContent =
+              artist + " — " + title;
 
-            }
+          } else if (title) {
+
+            songTitle.textContent =
+              title;
+
+          } else {
+
+            songTitle.textContent =
+              "Artist — Track Title";
+
+          }
 
         }
 
-    }
+      } catch (error) {
 
-    catch (error) {
-
-        console.log(
-            "Now Playing:",
-            error
+        console.error(
+          "Now Playing hatası:",
+          error
         );
 
+      }
+
     }
 
-}
+
+    /*
+      Sayfa açılır açılmaz şarkıyı al
+    */
+
+    updateNowPlaying();
 
 
-/* ==========================================
-   İLK YÜKLEME
-========================================== */
+    /*
+      Her 5 saniyede bir güncelle
+    */
 
-updateNowPlaying();
-
-
-/* ==========================================
-   5 SANİYEDE BİR GÜNCELLE
-========================================== */
-
-setInterval(
-    updateNowPlaying,
-    5000
-);
+    setInterval(
+      updateNowPlaying,
+      5000
+    );
 
 
-/* ==========================================
-   SES SEVİYESİ
-========================================== */
+    /*
+      Yayın doğal olarak durursa
+      butonu tekrar PLAY yap
+    */
 
-radio.volume = 0.8;
+    radio.addEventListener(
+      "pause",
+      () => {
 
-</script>
+        if (radio.currentTime > 0) {
+
+          playButton.classList.remove(
+            "playing"
+          );
+
+        }
+
+      }
+    );
+
+  </script>
 
 </body>
 </html>
